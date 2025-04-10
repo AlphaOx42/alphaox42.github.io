@@ -67,9 +67,23 @@
         <div align="center">
             <a href="https://ton.org/"><img width="48" src="./assets/tapps.png" alt="logo of telegram web apps"></a>
         </div>
+
+        <div>
+            <label for="date-time-range-start">Select start date and time:</label>
+            <input
+                type="datetime-local"
+                id="date-time-range-start"
+                name="date-time-range-start"
+                value="2025-04-01T00:00"
+                min="2025-04-01T00:00"
+                max="2025-04-01T23:59" />
+            
+        </div>
+        
         <h1>Modals</h1>
         <button onclick="Telegram.WebApp.showAlert('Hello World!');">Launch Alert</button>
         <button onclick="showPopup();">Launch Popup</button>
+        <button onclick="sendData();">Send</button>
 
         <h1>Links</h1>
         <ul>
@@ -96,6 +110,16 @@
         // Init TWA
         Telegram.WebApp.ready();
 
+        dateTimeControlRangStart = document.getElementById("date-time-range-start");
+        dateTimeControlRangeEnd = document.getElementById("date-time-range-end");
+        const dateNow = new Date();
+        dateTimeControlRangStart.max = dateNow.toISOString().substring(0, 16);
+        dateTimeControlRangeEnd.max = dateNow.toISOString().substring(0, 16);
+        dateTimeControlRangeEnd.value = dateNow.toISOString().substring(0, 16);
+        defaultDate = new Date();
+        defaultDate.setTime(dateNow.getTime() - 2 * 3600 * 1000)
+        dateTimeControlRangStart.value = defaultDate.toISOString().substring(0, 16);
+
         // Event occurs whenever theme settings are changed in the user's Telegram app (including switching to night mode).
         Telegram.WebApp.onEvent('themeChanged', function() {
             document.documentElement.className = Telegram.WebApp.colorScheme;
@@ -103,10 +127,13 @@
 
         // Show main button
         Telegram.WebApp.MainButton.setParams({
-            text: 'Main Button'
+            text: 'Submit'
         });
         Telegram.WebApp.MainButton.onClick(function () {
             Telegram.WebApp.showAlert('Main Button was clicked')
+            const data =  JSON.stringify({ start: document.getElementById("date-time-range-start").value,
+                                           end: document.getElementById("date-time-range-end").value})
+            Telegram.WebApp.sendData(data);
         });	
         Telegram.WebApp.MainButton.show();
 
@@ -142,6 +169,12 @@
 
             var expandEl = document.querySelector('#viewport-params-expand');
             expandEl.innerText = 'Is Expanded: ' + (Telegram.WebApp.isExpanded ? 'true' : 'false');
+        }
+
+        function sendData() {
+            const data =  JSON.stringify({ start: document.getElementById("date-time-range-start").value,
+                                           end: document.getElementById("date-time-range-end").value})
+            Telegram.WebApp.sendData(data);
         }
 
         Telegram.WebApp.setHeaderColor('secondary_bg_color');
