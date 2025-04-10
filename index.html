@@ -64,10 +64,6 @@
 
 <body>
     <main>
-        <div align="center">
-            <a href="https://ton.org/"><img width="48" src="./assets/tapps.png" alt="logo of telegram web apps"></a>
-        </div>
-
         <div>
             <label for="date-time-range-start">Select start date and time:</label>
             <input
@@ -117,6 +113,7 @@
 
         function sendData2() {
             var data = document.getElementById('abcde') + ' OH OH je je!'
+            console.log(document.getElementById('abcde').value)
             console.log(data)
             Telegram.WebApp.sendData(data);
         }
