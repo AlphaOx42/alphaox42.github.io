@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Select dates and times</title>
+    <title>1 Select dates and times</title>
     <script src="https://telegram.org/js/telegram-web-app.js?56"></script>
 </head>
 <body style="background-color: #ffffff">
@@ -37,14 +37,14 @@
         dateTimeControlRangeEnd.max = dateNow.toISOString().substring(0, 16);
         dateTimeControlRangeEnd.value = dateNow.toISOString().substring(0, 16);
         defaultDate = new Date();
-        defaultDate.setTime(dateNow.getTime() - 2 * 3600 * 1000)
+        defaultDate.setTime(dateNow.getTime() - 2 * 3600 * 1000);
         dateTimeControlRangStart.value = defaultDate.toISOString().substring(0, 16);
 
         function formSubmit(event)
         {
             event.preventDefault(); // prevent the form from submitting
             const data =  JSON.stringify({ start: document.getElementById("date-time-range-start").value,
-                                           end: document.getElementById("date-time-range-end");.value})
+                                           end: document.getElementById("date-time-range-end");.value});
             Telegram.WebApp.sendData(data);
             Telegram.WebApp.close();
         }
