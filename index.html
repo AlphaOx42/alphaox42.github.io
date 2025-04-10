@@ -15,7 +15,7 @@
         name="date-time-range-start"
         value="2025-04-01T00:00"
         min="2025-04-01T00:00"
-        max="2018-06-14T00:00" />
+        max="2025-04-01T23:59" />
     <br>
 
     <label for="date-time-range-end">Select end date and time:</label>
@@ -25,12 +25,14 @@
         name="date-time-range-end"
         value="2025-04-01T00:00"
         min="2025-04-01T00:00"
-        max="2018-06-14T00:00" />
+        max="2025-04-01T23:59" />
     <br>
     <input type="submit">
     </form>
 
     <script type="text/javascript">
+        Telegram.WebApp.ready();
+        
         dateTimeControlRangStart = document.getElementById("date-time-range-start");
         dateTimeControlRangeEnd = document.getElementById("date-time-range-end");
         const dateNow = new Date();
@@ -40,8 +42,7 @@
         defaultDate = new Date();
         defaultDate.setTime(dateNow.getTime() - 2 * 3600 * 1000)
         dateTimeControlRangStart.value = defaultDate.toISOString().substring(0, 16);
-
-        Telegram.WebApp.ready();
+        
         Telegram.WebApp.MainButton.setText('Choose date and time range').show().onClick(function () {
             const data =  JSON.stringify({ start: document.getElementById("date-time-range-start").value,
                                            end: document.getElementById("date-time-range-end");.value})
