@@ -3,8 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <title>Select dates and times</title>
-    <script src="https://telegram.org/js/telegram-web-app.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/@jaames/iro@5"></script>
+    <script src="https://telegram.org/js/telegram-web-app.js?56"></script>
 </head>
 <body style="background-color: #ffffff">
     <form action="https://echo.free.beeceptor.com" id="sendDateTimeRange">
@@ -30,9 +29,7 @@
     <input type="submit">
     </form>
 
-    <script type="text/javascript">
-        Telegram.WebApp.ready();
-        
+    <script type="text/javascript">       
         dateTimeControlRangStart = document.getElementById("date-time-range-start");
         dateTimeControlRangeEnd = document.getElementById("date-time-range-end");
         const dateNow = new Date();
@@ -42,6 +39,7 @@
         defaultDate = new Date();
         defaultDate.setTime(dateNow.getTime() - 2 * 3600 * 1000)
         dateTimeControlRangStart.value = defaultDate.toISOString().substring(0, 16);
+        Telegram.WebApp.ready();
         
         Telegram.WebApp.MainButton.setText('Choose date and time range').show().onClick(function () {
             const data =  JSON.stringify({ start: document.getElementById("date-time-range-start").value,
