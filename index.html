@@ -68,7 +68,7 @@
             <label for="date-time-range-start">Select start date and time:</label>
             <input
                 type="datetime-local"
-                id="abcde"
+                id="startdate"
                 name="dateStart"
                 value="2025-04-01T00:00"
                 min="2025-03-01T00:00"
@@ -78,11 +78,11 @@
             <label for="date-time-range-end">Select end date and time:</label>
             <input
                 type="datetime-local"
-                id="dateEnd"
+                id="enddate"
                 name="date-time-range-end"
                 value="2025-04-01T00:00"
-                min="2025-04-01T00:00"
-                max="2025-04-01T23:59" />
+                min="2025-03-01T00:00"
+                max="2025-05-01T23:59" />
         </div>
         
         <h1>Modals</h1>
@@ -113,8 +113,8 @@
     <div id="viewport-params-expand"></div>
     <script src="https://telegram.org/js/telegram-web-app.js"></script>
     <script>
-        dateTimeControlRangStart = document.getElementById("dateStart");
-        dateTimeControlRangeEnd = document.getElementById("dateEnd");
+        dateTimeControlRangStart = document.getElementById("startdate");
+        dateTimeControlRangeEnd = document.getElementById("enddate");
         const dateNow = new Date();
         dateTimeControlRangStart.max = dateNow.toISOString().substring(0, 16);
         dateTimeControlRangeEnd.max = dateNow.toISOString().substring(0, 16);
@@ -131,11 +131,11 @@
         }
 
         function sendData2() {
-            var data = document.getElementById('dateStart') + ' OH OH je je!'
-            console.log(document.getElementById('dateStart').value)
-            console.log(document.getElementById('dateEnd').value)
+            var data = document.getElementById('startdate') + ' OH OH je je!'
+            console.log(document.getElementById('startdate').value)
+            console.log(document.getElementById('enddate').value)
             console.log(data)
-            Telegram.WebApp.sendData(document.getElementById('dateStart').value + ',' + document.getElementById('dateEnd').value);
+            Telegram.WebApp.sendData(document.getElementById('startdate').value + ',' + document.getElementById('enddate').value);
         }
         
         // Init TWA
