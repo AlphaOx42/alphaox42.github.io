@@ -2,21 +2,55 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Weather App</title>
-    <link rel="stylesheet" href="css/styles.css">
+    <title>Select dates and times</title>
+    <script src="https://telegram.org/js/telegram-web-app.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@jaames/iro@5"></script>
 </head>
-<body>
-    <div class="container">
-        <h1>Weather App</h1>
-        <div id="currentTime"></div>
-        <div id="currentLocation"></div>
-        <div>
-            <input type="text" id="locationInput" placeholder="Enter location">
-            <button onclick="getWeather()">Get Weather</button>
-        </div>
-        <div id="weatherData"></div>
-    </div>
-    <script src="js/script.js"></script>
+<body style="background-color: #ffffff">
+    <form action="https://echo.free.beeceptor.com" id="sendDateTimeRange">
+    <label for="date-time-range-start">Select start date and time:</label>
+    <input
+        type="datetime-local"
+        id="date-time-range-start"
+        name="date-time-range-start"
+        value="2025-04-01T00:00"
+        min="2025-04-01T00:00"
+        max="2018-06-14T00:00" />
+    <br>
+
+    <label for="date-time-range-end">Select end date and time:</label>
+    <input
+        type="datetime-local"
+        id="date-time-range-end"
+        name="date-time-range-end"
+        value="2025-04-01T00:00"
+        min="2025-04-01T00:00"
+        max="2018-06-14T00:00" />
+    <br>
+    <input type="submit">
+    </form>
+
+    <script type="text/javascript">
+        dateTimeControlRangStart = document.getElementById("date-time-range-start");
+        dateTimeControlRangeEnd = document.getElementById("date-time-range-end");
+        const dateNow = new Date();
+        dateTimeControlRangStart.max = dateNow.toISOString().substring(0, 16);
+        dateTimeControlRangeEnd.max = dateNow.toISOString().substring(0, 16);
+        dateTimeControlRangeEnd.value = dateNow.toISOString().substring(0, 16);
+        defaultDate = new Date();
+        defaultDate.setTime(dateNow.getTime() - 2 * 3600 * 1000)
+        dateTimeControlRangStart.value = defaultDate.toISOString().substring(0, 16);
+
+        Telegram.WebApp.ready();
+        Telegram.WebApp.MainButton.setText('Choose date and time range').show().onClick(function () {
+            const data =  JSON.stringify({ start: document.getElementById("date-time-range-start").value,
+                                           end: document.getElementById("date-time-range-end");.value})
+            Telegram.WebApp.sendData(data);
+            Telegram.WebApp.close();
+        });
+    </script>
 </body>
+<script type="text/javascript">
+    Telegram.WebApp.expand();
+</script>
 </html>
