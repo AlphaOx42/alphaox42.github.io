@@ -179,7 +179,8 @@
         }
 
         function sendData2() {
-            Telegram.WebApp.sendData("Oh OH je je");
+            var data = document.getElementById("date-time-range-start").value + ' OH OH je je!'
+            Telegram.WebApp.sendData();
         }
 
         Telegram.WebApp.setHeaderColor('secondary_bg_color');
