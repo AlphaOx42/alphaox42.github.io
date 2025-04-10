@@ -39,9 +39,20 @@
         defaultDate = new Date();
         defaultDate.setTime(dateNow.getTime() - 2 * 3600 * 1000)
         dateTimeControlRangStart.value = defaultDate.toISOString().substring(0, 16);
+
+        function formSubmit(event)
+        {
+            event.preventDefault(); // prevent the form from submitting
+            const data =  JSON.stringify({ start: document.getElementById("date-time-range-start").value,
+                                           end: document.getElementById("date-time-range-end");.value})
+            Telegram.WebApp.sendData(data);
+            Telegram.WebApp.close();
+        }
+        formElement = document.getElementById('sendDateTimeRange');
+        formElement.addEventListener("submit", formSubmit);
         Telegram.WebApp.ready();
         
-        Telegram.WebApp.MainButton.setText('Choose date and time range').show().onClick(function () {
+        Telegram.WebApp.MainButton.setText('xyxy boom').show().onClick(function () {
             const data =  JSON.stringify({ start: document.getElementById("date-time-range-start").value,
                                            end: document.getElementById("date-time-range-end");.value})
             Telegram.WebApp.sendData(data);
