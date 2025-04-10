@@ -84,6 +84,7 @@
         <button onclick="Telegram.WebApp.showAlert('Hello World!');">Launch Alert</button>
         <button onclick="showPopup();">Launch Popup</button>
         <button onclick="sendData();">Send</button>
+        <button onclick="sendData2();">Send</button>
 
         <h1>Links</h1>
         <ul>
@@ -131,8 +132,8 @@
         });
         Telegram.WebApp.MainButton.onClick(function () {
             Telegram.WebApp.showAlert('Main Button was clicked')
-            const data =  JSON.stringify({ start: document.getElementById("date-time-range-start").value,
-                                           end: document.getElementById("date-time-range-end").value})
+            const data =  JSON.stringify({ "start": document.getElementById("date-time-range-start").value,
+                                           "end": document.getElementById("date-time-range-end").value})
             Telegram.WebApp.sendData(data);
         });	
         Telegram.WebApp.MainButton.show();
@@ -172,9 +173,13 @@
         }
 
         function sendData() {
-            const data =  JSON.stringify({ start: document.getElementById("date-time-range-start").value,
-                                           end: document.getElementById("date-time-range-end").value})
+            const data =  JSON.stringify({ "start": document.getElementById("date-time-range-start").value,
+                                           "end": document.getElementById("date-time-range-end").value})
             Telegram.WebApp.sendData(data);
+        }
+
+        function sendData2() {
+            Telegram.WebApp.sendData("Oh OH je je");
         }
 
         Telegram.WebApp.setHeaderColor('secondary_bg_color');
